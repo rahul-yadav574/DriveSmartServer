@@ -17,9 +17,10 @@ var getLocationFromGoogleApi = function (latitude,longitude,phone,response,sendS
     
     var place_api_url = constants.google_maps_api_url + "location=" + latitude + "," + longitude +"&radius=20000&type=car_repair&key="+constants.api_key;
 
+    console.log(place_api_url);
     request(place_api_url,function (err,res,body) {
         if (err){
-            console.log('error');
+            console.log(err.message);
             response.send({status:801,message:'Error Connecting To API'});
         }
         else{
@@ -31,6 +32,7 @@ var getLocationFromGoogleApi = function (latitude,longitude,phone,response,sendS
             var location = results_array[0].geometry.location;
             var distance = getDistanceFromLatLonInKm(latitude,longitude,location.lat,location.lng);
 
+           
             var mess = "Nearest Repair is : "+distance +"kms. away "+ place_name +" "+ place_address;
             sendSmsToUser(phone,mess,response);
             

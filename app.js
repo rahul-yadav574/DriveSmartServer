@@ -1,6 +1,7 @@
 
 var routes = require('./routes/index');
 var sendmessage = require('./routes/sendmessage');
+var socketsserver = require('./routes/chatserver');
 var express = require('express');
 
 var app = express();
@@ -8,6 +9,7 @@ require('./utils/config')(app);
 
 app.use('/', routes);
 app.use('/sendmessage', sendmessage);
+app.use('/sockets',socketsserver);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
