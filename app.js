@@ -3,6 +3,7 @@ var routes = require('./routes/index');
 var sendmessage = require('./routes/sendmessage');
 var socketsserver = require('./routes/chatserver');
 var express = require('express');
+var guidebot = require('./routes/guidebot');
 
 var app = express();
 require('./utils/config')(app);
@@ -10,6 +11,7 @@ require('./utils/config')(app);
 app.use('/', routes);
 app.use('/sendmessage', sendmessage);
 app.use('/sockets',socketsserver);
+app.use('/guidebot',guidebot);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
