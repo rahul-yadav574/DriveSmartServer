@@ -45,7 +45,7 @@ router.post('/',function (req,res,next) {
     var bitmap = new Buffer(encoded_image,'base64');
    
     var api_url =  'https://api.havenondemand.com/1/api/sync/ocrdocument/v1';
-    var store_url = 'https://api.havenondemand.com/1/api/async/storeobject/v1';
+    var store_url = 'https://api.havenondemand.com/1/api/sync/storeobject/v1';
 
     jimp.read(bitmap,function (err,image) {
 
