@@ -48,7 +48,7 @@ router.post('/',function (req,res,next) {
     request({
         url:api_url,
         method:'POST',
-        json:{
+        form:{
             apikey:'439a27da-a17c-410c-9201-b8e12f6ddade',
             file:bitmap
         }
