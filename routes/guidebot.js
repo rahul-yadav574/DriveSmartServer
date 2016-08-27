@@ -58,7 +58,6 @@ router.post('/',function (req,res,next) {
             }
         }
     );
-    res.send({status:true,data:'image recevied',type:'text_message'});
 
 
 
