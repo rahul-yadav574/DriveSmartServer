@@ -45,6 +45,7 @@ router.post('/',function (req,res,next) {
     var bitmap = new Buffer(encoded_image,'base64');
    
     var api_url =  'https://api.havenondemand.com/1/api/sync/ocrdocument/v1';
+    var store_url = 'https://api.havenondemand.com/1/api/async/storeobject/v1';
 
     jimp.read(bitmap,function (err,image) {
 
@@ -55,9 +56,23 @@ router.post('/',function (req,res,next) {
         }
         else{
 
-            res.writeHead(200, {'Content-Type': 'image/jpeg'});
-            res.end(image);
+
             request({
+                url: api_url,
+                method: 'POST',
+                form: {
+                    apikey: '439a27da-a17c-410c-9201-b8e12f6ddade', file: image
+                }
+            },
+                function (error,response,body) {
+                    if (error){
+                        res.send({status:false,data:'Bot not able to OCR the image'});
+                    }else{
+                        res.send({status:true,data:body,type:'text_message'});
+                    }
+            });
+
+         /*   request({
                     url:api_url,
                     method:'POST',
                     form:{apikey:'439a27da-a17c-410c-9201-b8e12f6ddade',file:image}
@@ -70,7 +85,7 @@ router.post('/',function (req,res,next) {
                         res.send({status:true,data:body,type:'text_message'});
                     }
                 }
-            );
+            );*/
 
         }
     });
