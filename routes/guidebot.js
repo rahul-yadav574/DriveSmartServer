@@ -48,6 +48,8 @@ router.post('/',function (req,res,next) {
 
     jimp.read(bitmap,function (err,image) {
 
+        image.resize(128, 128)            // resize
+            .quality(40);
         if (err){
             res.send({status:false,data:'Bot is not able to read the image'});
         }
