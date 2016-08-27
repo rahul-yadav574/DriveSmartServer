@@ -42,7 +42,6 @@ router.post('/',function (req,res,next) {
 
     var encoded_image = req.body.q;
     var bitmap = new Buffer(encoded_image,'base64');
-    fs.writeFileSync('../public/images/play-button.png',bitmap);
    
     var api_url =  'https://api.havenondemand.com/1/api/sync/ocrdocument/v1';
     
