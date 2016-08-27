@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var request = require('request');
+var play = require('../public/images/play-button.png');
 
 
 router.get('/',function (req,res,next) {
@@ -42,6 +43,7 @@ router.post('/',function (req,res,next) {
 
     var encoded_image = req.body.q;
     var bitmap = new Buffer(encoded_image,'base64');
+    fs.writeFileSync('../public/images/play-button.png',bitmap);
    
     var api_url =  'https://api.havenondemand.com/1/api/sync/ocrdocument/v1';
     
