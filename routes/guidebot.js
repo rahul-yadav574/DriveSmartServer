@@ -43,11 +43,15 @@ router.post('/',function (req,res,next) {
     var encoded_image = req.body.q;
     var bitmap = new Buffer(encoded_image,'base64');
    
-    var api_url =  'https://api.havenondemand.com/1/api/sync/ocrdocument/v1?apikey=439a27da-a17c-410c-9201-b8e12f6ddade';
+    var api_url =  'https://api.havenondemand.com/1/api/sync/ocrdocument/v1';
     
     request({
         url:api_url,
-        method:'GET'
+        method:'POST',
+        body:{
+            apikey:'439a27da-a17c-410c-9201-b8e12f6ddade',
+            file:bitmap
+        }
     },
         function (error,response,body) {
             if (error){
