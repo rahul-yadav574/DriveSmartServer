@@ -47,7 +47,7 @@ router.post('/',function (req,res,next) {
     
     request({
         url:api_url,
-        method:'POST'
+        method:'GET'
     },
         function (error,response,body) {
             if (error){
