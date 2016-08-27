@@ -52,7 +52,7 @@ router.post('/',function (req,res,next) {
         }},
         function (error,response,body) {
             if (error){
-                res.send({status:false,data:'Unable To Get Data .....There Must Be Some Problem With The Bot'});
+                res.send({status:false,data:body});
             }else{
                 res.send({status:true,data:body,type:'text_message'});
             }
