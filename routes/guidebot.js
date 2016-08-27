@@ -37,6 +37,16 @@ router.get('/',function (req,res,next) {
 
 });
 
+router.post('/',function (req,res,next) {
+
+    var encoded_image = req.body.q;
+    var bitmap = new Buffer(encoded_image,'base64');
+    res.send({status:true,data:encoded_image,type:'text_message'});
+
+
+
+});
+
 
 var retreiveAndSendText = function (search_query,response) {
 
@@ -78,7 +88,7 @@ var retreiveAndSendImages = function (search_query,response) {
             var json_res = JSON.parse(body);
 
             if (json_res.result_count == 0){
-                response.send({status:true,data:'Try Using Another Name ....Bot Is Confusing',type:'text_message'});
+                response.send({status:true,data:'Try Using Another Name ....Bot Is Confused',type:'text_message'});
             }
 
             else {
