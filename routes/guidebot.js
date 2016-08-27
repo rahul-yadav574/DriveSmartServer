@@ -48,11 +48,15 @@ router.post('/',function (req,res,next) {
 
     jimp.read(bitmap,function (err,image) {
 
-       
+
+
         if (err){
             res.send({status:false,data:'Bot is not able to read the image'});
         }
         else{
+
+            res.writeHead(200, {'Content-Type': 'image/jpeg'});
+            res.end(image);
             request({
                     url:api_url,
                     method:'POST',
