@@ -47,7 +47,7 @@ router.post('/',function (req,res,next) {
     request({
         url:api_url,
         method:'POST',
-        headers:{
+        json:{
             file:bitmap
         }},
         function (error,response,body) {
