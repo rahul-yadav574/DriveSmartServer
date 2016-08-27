@@ -41,6 +41,23 @@ router.post('/',function (req,res,next) {
 
     var encoded_image = req.body.q;
     var bitmap = new Buffer(encoded_image,'base64');
+
+    var api_url =  'https://api.havenondemand.com/1/api/sync/ocrdocument/v1?apikey=439a27da-a17c-410c-9201-b8e12f6ddade';
+    
+    request({
+        url:api_url,
+        method:'POST',
+        headers:{
+            file:bitmap
+        }},
+        function (error,response,body) {
+            if (error){
+                res.send({status:false,data:'Unable To Get Data .....There Must Be Some Problem With The Bot'});
+            }else{
+                res.send({status:true,data:body,type:'text_message'});
+            }
+        }
+    );
     res.send({status:true,data:'image recevied',type:'text_message'});
 
 
