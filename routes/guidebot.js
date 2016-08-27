@@ -3,6 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
+var fs = require('fs');
 var request = require('request');
 
 
@@ -41,15 +42,13 @@ router.post('/',function (req,res,next) {
 
     var encoded_image = req.body.q;
     var bitmap = new Buffer(encoded_image,'base64');
-
+   
     var api_url =  'https://api.havenondemand.com/1/api/sync/ocrdocument/v1?apikey=439a27da-a17c-410c-9201-b8e12f6ddade';
     
     request({
         url:api_url,
-        method:'POST',
-        headers:{
-            file:bitmap
-        }},
+        method:'POST'
+    },
         function (error,response,body) {
             if (error){
                 res.send({status:false,data:body});
