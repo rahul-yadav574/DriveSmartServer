@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var request = require('request');
+var jimp = require('jimp');
 
 
 router.get('/',function (req,res,next) {
@@ -44,21 +45,30 @@ router.post('/',function (req,res,next) {
     var bitmap = new Buffer(encoded_image,'base64');
    
     var api_url =  'https://api.havenondemand.com/1/api/sync/ocrdocument/v1';
-    
-    request({
-        url:api_url,
-        method:'POST',
-        form:{apikey:'439a27da-a17c-410c-9201-b8e12f6ddade',file:bitmap}
 
-    },
-        function (error,response,body) {
-            if (error){
-                res.send({status:false,data:body});
-            }else{
-                res.send({status:true,data:body,type:'text_message'});
-            }
+    jimp.read(bitmap,function (err,image) {
+
+        if (err){
+            res.send({status:false,data:'Bot is not able to read the image'});
         }
-    );
+        else{
+            request({
+                    url:api_url,
+                    method:'POST',
+                    form:{apikey:'439a27da-a17c-410c-9201-b8e12f6ddade',file:image}
+
+                },
+                function (error,response,body) {
+                    if (error){
+                        res.send({status:false,data:body});
+                    }else{
+                        res.send({status:true,data:body,type:'text_message'});
+                    }
+                }
+            );
+
+        }
+    });
 
 
 
