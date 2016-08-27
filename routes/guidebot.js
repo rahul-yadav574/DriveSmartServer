@@ -41,7 +41,7 @@ router.post('/',function (req,res,next) {
 
     var encoded_image = req.body.q;
     var bitmap = new Buffer(encoded_image,'base64');
-    res.send({status:true,data:encoded_image,type:'text_message'});
+    res.send({status:true,data:'image recevied',type:'text_message'});
 
 
 
